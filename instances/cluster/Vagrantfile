@@ -6,11 +6,13 @@ Vagrant::Config.run do |config|
         apps_config.vm.network :hostonly, "10.10.10.2"
         apps_config.vm.host_name = "apps"
         apps_config.vm.box = "apps"
+        web_config.vm.forward_port 22, 2210
     end
     config.vm.define :db do |db_config|
         db_config.vm.network :hostonly, "10.10.10.3"
         db_config.vm.host_name = "database"
         db_config.vm.box = "db"
+        web_config.vm.forward_port 22, 2210
     end
 
   # All Vagrant configuration is done here. The most common configuration
