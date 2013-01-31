@@ -113,17 +113,17 @@ Vagrant::Config.run do |config|
     db_config.vm.host_name = "db"                                                                                                            
     db_config.vm.network :hostonly, "10.10.10.11"
     db_config.vm.forward_port 22, 2211
+    db_config.vm.box = "db"
     db_config.vm.provision :chef_solo do |chef|
     	chef.cookbooks_path = "../../chef/cookbooks"
     	chef.roles_path     = "../../chef/roles"
     	chef.add_role "db"
-	
-	chef.json = {
-	    :mysql => {
-		:server_root_password => "xface777ab81",
-		:bind_address => "10.10.10.11"
+	    chef.json = {
+	        :mysql => {
+		        :server_root_password => "xface777ab81",
+		        :bind_address => "10.10.10.11"
+	        }
 	    }
-	}
     end
   end
 
