@@ -1,17 +1,30 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-Vagrant::Config.run do |config|
+Vagrant::Config.run do |config|	
+    config.vm.define :apps do |apps_config|
+        apps_config.vm.network :hostonly, "10.10.10.2"
+        apps_config.vm.host_name = "apps"
+        apps_config.vm.box = "apps"
+        web_config.vm.forward_port 22, 2210
+    end
+    config.vm.define :db do |db_config|
+        db_config.vm.network :hostonly, "10.10.10.3"
+        db_config.vm.host_name = "database"
+        db_config.vm.box = "db"
+        web_config.vm.forward_port 22, 2210
+    end
+
   # All Vagrant configuration is done here. The most common configuration
   # options are documented and commented below. For a complete reference,
   # please see the online documentation at vagrantup.com.
 
   # Every Vagrant virtual environment requires a box to build off of.
-  config.vm.box = "myserver"
+  #config.vm.box = "base"
 
   # The url from where the 'config.vm.box' box will be fetched if it
   # doesn't already exist on the user's system.
-  config.vm.box_url = "../../../Playground/vagrant/box/centos.box"
+  # config.vm.box_url = "http://domain.com/path/to/above.box"
 
   # Boot with a GUI so you can see the screen. (Default is headless)
   # config.vm.boot_mode = :gui
@@ -39,7 +52,7 @@ Vagrant::Config.run do |config|
   # Enable provisioning with Puppet stand alone.  Puppet manifests
   # are contained in a directory path relative to this Vagrantfile.
   # You will need to create the manifests directory and a manifest in
-  # the file db.pp in the manifests_path directory.
+  # the file base.pp in the manifests_path directory.
   #
   # An example Puppet manifest to provision the message of the day:
   #
@@ -56,7 +69,7 @@ Vagrant::Config.run do |config|
   #
   # config.vm.provision :puppet do |puppet|
   #   puppet.manifests_path = "manifests"
-  #   puppet.manifest_file  = "db.pp"
+  #   puppet.manifest_file  = "base.pp"
   # end
 
   # Enable provisioning with chef solo, specifying a cookbooks path, roles
@@ -96,26 +109,4 @@ Vagrant::Config.run do |config|
   # chef-validator, unless you changed the configuration.
   #
   #   chef.validation_client_name = "ORGNAME-validator"
-  config.vm.define :web do |web_config|
-    web_config.vm.host_name = "web"
-    web_config.vm.network :hostonly, "10.10.10.10"
-    web_config.vm.forward_port 22, 2210
-    web_config.vm.forward_port 80, 8010
-    web_config.vm.provision :chef_solo do |chef|
-    	chef.cookbooks_path = "../../chef/cookbooks"
-    	chef.roles_path     = "../../chef/roles"
-    	chef.add_role "web"
-    end
-  end
-
-  config.vm.define :db do |db_config|
-    db_config.vm.host_name = "db"                                                                                                            
-    db_config.vm.network :hostonly, "10.10.10.11"
-    db_config.vm.forward_port 22, 2211
-    db_config.vm.provision :chef_solo do |chef|
-    	chef.cookbooks_path = "../../chef/cookbooks"
-    	chef.roles_path     = "../../chef/roles"
-    	chef.add_role "db"
-    end
-  end
 end
