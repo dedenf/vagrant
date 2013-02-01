@@ -102,6 +102,7 @@ Vagrant::Config.run do |config|
     web_config.vm.forward_port 22, 2210
     web_config.vm.forward_port 80, 8010
     web_config.vm.box = "web"
+    web_config.vm.share_folder "web", "/var/www/html", "~/Sites/vagrant-web"
     web_config.vm.provision :chef_solo do |chef|
     	chef.cookbooks_path = "../../chef/cookbooks"
     	chef.roles_path     = "../../chef/roles"
