@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+
+  <title>File: README.rdoc [RDoc Documentation]</title>
+
+  <link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet" />
+
+  <script src="./js/jquery.js" type="text/javascript"
+    charset="utf-8"></script>
+  <script src="./js/thickbox-compressed.js" type="text/javascript"
+    charset="utf-8"></script>
+  <script src="./js/quicksearch.js" type="text/javascript"
+    charset="utf-8"></script>
+  <script src="./js/darkfish.js" type="text/javascript"
+    charset="utf-8"></script>
+</head>
+
+<body class="file">
+  <div id="metadata">
+    <div id="home-metadata">
+      <div id="home-section" class="section">
+        <h3 class="section-header">
+          <a href="./index.html">Home</a>
+          <a href="./index.html#classes">Classes</a>
+          <a href="./index.html#methods">Methods</a>
+        </h3>
+      </div>
+    </div>
+
+    <div id="project-metadata">
+      
+      
+      <div id="fileindex-section" class="section project-section">
+        <h3 class="section-header">Files</h3>
+        <ul>
+        
+          <li class="file"><a href="./README_rdoc.html">README.rdoc</a></li>
+        
+        </ul>
+      </div>
+      
+
+      <div id="classindex-section" class="section project-section">
+        <h3 class="section-header">Class Index
+          <span class="search-toggle"><img src="./images/find.png"
+            height="16" width="16" alt="[+]"
+            title="show/hide quicksearch" /></span></h3>
+        <form action="#" method="get" accept-charset="utf-8" class="initially-hidden">
+        <fieldset>
+          <legend>Quicksearch</legend>
+          <input type="text" name="quicksearch" value=""
+            class="quicksearch-field" />
+        </fieldset>
+        </form>
+
+        <ul class="link-list">
+        
+        </ul>
+        <div id="no-class-search-results" style="display: none;">No matching classes.</div>
+      </div>
+
+      
+    </div>
+  </div>
+
+  <div id="documentation">
+    
+<h1>DESCRIPTION:</h1>
+
+<p>This cookbooks installs Redis 2 key-value datastore server. Redis can be
+installed from packages (where available) or source.</p>
+
+<h1>REQUIREMENTS:</h1>
+
+<p>For compiling from source: build-essential</p>
+
+<h1>ATTRIBUTES: </h1>
+<dl class="rdoc-list"><dt>redis2.install_from</dt>
+<dd>
+<p><em>package</em> to install from distro packages, any other value to
+install from source.</p>
+</dd><dt>redis2.instances.default</dt>
+<dd>
+<p>default attributes for all redis instances, will be merged with per
+instance attributes</p>
+</dd><dt>redis2.instances.<em>instance_name</em></dt>
+<dd>
+<p>per instance configuration attributes tree</p>
+</dd></dl>
+
+<h1>USAGE:</h1>
+
+<p>This cookbook implements redis instances as a definition. If you plan to
+run only one instance, use the <tt>redis::default_instance</tt> recipe
+which call a “redis_default” <tt>redis_instance</tt>. To spawn instances of
+redis, use the <tt>redis_instance</tt> definition, usage is pretty straight
+forward:</p>
+
+<pre>redis_instance &quot;datastore&quot; do
+  port 8866
+  data_dir &quot;/mnt/redis/datastore&quot;
+  master master_node
+end</pre>
+
+<p><em>port</em>, <em>data_dir</em> and <em>master</em> are the only
+attributes directly configurable using the definition syntax. Other
+attributes can be configured using the normal attribute interface under the
+<tt>node["redis2"][&quot;instances"][instance_name]</tt> scope. Missing
+attributes will be merged from
+<tt>node["redis2"][&quot;instances"]["default"]</tt></p>
+
+<p>The <em>master</em> attribute will set up redis as a slave of a the same
+redis instance on another server. It will not set
+<tt>node["redis2"][&quot;instances"][instance_name][&quot;replication"]["role"]</tt>
+(which can be <em>slave</em> or <em>master</em>), because redis can be both
+at the same time (e.g. chained masters).</p>
+
+<h2>Recipes</h2>
+<ul><li>
+<p>redis2::auto - automagically call redis_instance for every instance defined
+in the <tt>node["redis2"][&quot;instances&quot;]</tt> tree.</p>
+</li><li>
+<p>redis2::default_instance - use this if you want a simple recipe with a
+single redis instance</p>
+</li></ul>
+
+<p>It’s generally not a good idea to use the redis2::default_instance recipe.
+If you want a single redis instance, either use redis_instance definition
+or redis2::auto and define your instance in the attributes tree.</p>
+
+  </div>
+
+  <div id="validator-badges">
+    <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+    <p><small>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish
+      Rdoc Generator</a> 2</small>.</p>
+  </div>
+</body>
+</html>
+
