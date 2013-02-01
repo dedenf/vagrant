@@ -146,6 +146,8 @@ Vagrant::Config.run do |config|
       chef.cookbooks_path = "../../chef/cookbooks/"
       chef.roles_path     = "../../chef/roles"
       chef.add_role "mon"
+      # at this point, no recipes will included.
+      # all broken, and sometimes tired to see the config file.
     end
     
     
