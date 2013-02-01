@@ -107,6 +107,12 @@ Vagrant::Config.run do |config|
     	chef.cookbooks_path = "../../chef/cookbooks"
     	chef.roles_path     = "../../chef/roles"
     	chef.add_role "web"
+      chef.json = {
+        "apps" => {
+          "server_alias" => "web.dev.local",
+          "docroot" => "/var/www/html"
+        }
+      }
     end
   end
 
@@ -129,11 +135,11 @@ Vagrant::Config.run do |config|
   end
 
   config.vm.define :mon do |mon_config|
-    mon_config.vm.host_name = "web"
-    mon_config.vm.network :hostonly, "10.10.10.10"
-    mon_config.vm.forward_port 22, 2210
-    mon_config.vm.forward_port 80, 8010
-    mon_config.vm.box = "web"
+    mon_config.vm.host_name = "monitoring"
+    mon_config.vm.network :hostonly, "10.10.10.12"
+    mon_config.vm.forward_port 22, 2212
+    mon_config.vm.forward_port 80, 8012
+    mon_config.vm.box = "mon"
   end
 
 end

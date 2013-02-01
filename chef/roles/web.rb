@@ -5,8 +5,10 @@ run_list(
   "recipe[passenger_apache2::mod_rails]", \
   "recipe[mysql::client]",\
   "recipe[myapp::web]",\
+  "recipe[redis]",\
   "recipe[vim]",\
   "recipe[zsh]",\
   "recipe[php]",\
-  "recipe[git]"
+  "recipe[git]",\
+  "recipe[varnish]"
 )
