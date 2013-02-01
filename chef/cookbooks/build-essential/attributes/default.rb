@@ -19,7 +19,7 @@
 
 default['build_essential']['compiletime'] = false
 
-case node['platform_family']
+case node['platform']
 when "mac_os_x"
   case
   when Chef::VersionConstraint.new("~> 10.7.0").include?(node['platform_version']),
