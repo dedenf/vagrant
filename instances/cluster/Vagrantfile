@@ -128,4 +128,12 @@ Vagrant::Config.run do |config|
     end
   end
 
+  config.vm.define :mon do |mon_config|
+    mon_config.vm.host_name = "web"
+    mon_config.vm.network :hostonly, "10.10.10.10"
+    mon_config.vm.forward_port 22, 2210
+    mon_config.vm.forward_port 80, 8010
+    mon_config.vm.box = "web"
+  end
+
 end

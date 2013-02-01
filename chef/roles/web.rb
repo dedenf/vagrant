@@ -6,5 +6,7 @@ run_list(
   "recipe[mysql::client]",\
   "recipe[myapp::web]",\
   "recipe[vim]",\
-  "recipe[zsh]"
+  "recipe[zsh]",\
+  "recipe[php]",\
+  "recipe[git]"
 )
