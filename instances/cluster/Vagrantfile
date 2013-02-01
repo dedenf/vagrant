@@ -142,6 +142,13 @@ Vagrant::Config.run do |config|
     mon_config.vm.forward_port 22, 2212
     mon_config.vm.forward_port 80, 8012
     mon_config.vm.box = "mon"
+    mon_config.vm.provision :chef_solo do |chef|
+      chef.cookbooks_path = "../../chef/cookbooks/"
+      chef.roles_path     = "../../chef/roles"
+      chef.add_role "mon"
+    end
+    
+    
   end
 
 end
