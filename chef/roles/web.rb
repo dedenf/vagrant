@@ -9,6 +9,6 @@ run_list(
   "recipe[vim]",\
   "recipe[zsh]",\
   "recipe[php]",\
-  "recipe[git]",\
-  "recipe[varnish]"
+  "recipe[git]"
+ # "recipe[varnish]"
 )

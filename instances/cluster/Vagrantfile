@@ -99,6 +99,7 @@ Vagrant::Config.run do |config|
   config.vm.define :web do |web_config|
     web_config.vm.host_name = "web"
     web_config.vm.network :hostonly, "10.10.10.10"
+    #web_config.vm.ssh "10.10.10.10"
     web_config.vm.forward_port 22, 2210
     web_config.vm.forward_port 80, 8010
     web_config.vm.box = "web"
@@ -137,6 +138,7 @@ Vagrant::Config.run do |config|
   config.vm.define :mon do |mon_config|
     mon_config.vm.host_name = "monitoring"
     mon_config.vm.network :hostonly, "10.10.10.12"
+    #mon_config.vm.ssh.host "10.10.10.12"
     mon_config.vm.forward_port 22, 2212
     mon_config.vm.forward_port 80, 8012
     mon_config.vm.box = "mon"
