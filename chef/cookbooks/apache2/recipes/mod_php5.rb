@@ -30,7 +30,6 @@ when "arch"
 
 when "rhel"
 
-  package "which"
   package "php package" do
     if node['platform_version'].to_f < 6.0
       package_name "php53"
