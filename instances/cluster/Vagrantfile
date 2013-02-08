@@ -130,7 +130,12 @@ Vagrant::Config.run do |config|
 	        "mysql" => {
 		        "server_root_password" => "xface777ab81",
 		        "bind_address" => "10.10.10.11"
-	        }
+	        },
+          "dba" => {
+            "database" => {
+              "password" => "asdasdasd"
+            }
+          }
 	    }
     end
   end
