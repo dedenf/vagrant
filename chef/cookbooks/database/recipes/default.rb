@@ -17,4 +17,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+include_recipe "database::mysql"
 
+#create database
+mysql_database 'sonar' do 
+  connect ({ :host => "localhost", :username => "root", :password => node['mysql']['server_root_password'] })
+  action :create
+end
