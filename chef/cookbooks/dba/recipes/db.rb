@@ -7,7 +7,7 @@ mysql_connection_info = {
 
 mysql_database node['myapp']['database']['name'] do 
   connection mysql_connection_info
-  action :create
+  #action :create
 end
 
 mysql_database_user node['dba']['database']['user'] do 
